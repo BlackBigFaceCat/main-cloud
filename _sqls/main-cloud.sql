@@ -602,3 +602,39 @@ INSERT INTO `sys_user_pos` VALUES (1144495219551617025, 1, 1);
 COMMIT;
 
 SET FOREIGN_KEY_CHECKS = 1;
+
+
+----------------------------------------- 业务表 --------------------------------------------------
+DROP TABLE IF EXISTS `mc_song`;
+CREATE TABLE `mc_song` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '歌曲ID',
+  `name` varchar(150) NOT NULL COMMENT '歌名',
+  `singer` varchar(50) DEFAULT NULL COMMENT '歌手',
+  `length` double NOT NULL COMMENT '歌曲时间长度',
+  `word` varchar(255) DEFAULT NULL COMMENT '歌词',
+  `music_path` varchar(255) NOT NULL COMMENT '歌曲存放地址',
+  `pic_path` varchar(255) DEFAULT NULL COMMENT '歌曲图片存放地址',
+  `upload_user_id` int(11) NOT NULL COMMENT '上传歌曲用户ID',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `comment_id` int(11) DEFAULT NULL COMMENT '评论ID',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='歌曲表';
+
+DROP TABLE IF EXISTS `mc_vice_comment`;
+CREATE TABLE `mc_vice_comment` (
+  `id` int(11) NOT NULL COMMENT '回复评论ID',
+  `content` varchar(255) DEFAULT NULL COMMENT '内容',
+  `user_id` int(11) DEFAULT NULL COMMENT '用户ID',
+  `main_comment_id` int(11) DEFAULT NULL COMMENT '评论表ID',
+  `create_time` datetime DEFAULT NULL COMMENT '回复时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='回复表';
+
+DROP TABLE IF EXISTS `mc_main_comment`;
+CREATE TABLE `mc_main_comment` (
+  `id` int(11) NOT NULL COMMENT '评论表ID',
+  `content` varchar(255) DEFAULT NULL COMMENT '评论内容',
+  `user_id` int(11) DEFAULT NULL COMMENT '评论用户ID',
+  `create_time` datetime DEFAULT NULL COMMENT '评论创建时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='评论表';
